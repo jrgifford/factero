@@ -2,8 +2,10 @@ dependencies:
 
 - green_shoes gem
 
-- facter
+- facter gem
 
 - ruby 1.9.3
 
 - xclip
+
+- clipboard gem

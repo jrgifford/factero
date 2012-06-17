@@ -3,15 +3,36 @@ require 'facter'
 require 'clipboard'
 require 'net/http'
 
+
+
+# lets try the Yahoo! caching system from http://developer.yahoo.com/ruby/ruby-cache.html
+
+class MemFetcher
+   def initialize
+      # we initialize an empty hash
+      @cache = {}
+   end
+   def fetch(url, max_age=0)
+      # if the API URL exists as a key in cache, we just return it
+      # we also make sure the data is fresh
+      if @cache.has_key? url
+         return @cache[url][1] if Time.now-@cache[url][0]<max_age
+      end
+      # if the URL does not exist in cache or the data is not fresh,
+      #  we fetch again and store in cache
+      @cache[url] = [Time.now, Net::HTTP.get_response(URI.parse(url)).body]
+   end
+end
+
+$fetcher = MemFetcher.new
+
 class WhatIsMy
   def self.external_ip
-    url = "http://icanhazip.com/"
-    resp = Net::HTTP.get_response(URI.parse(url))
-    resp.body
+    $fetcher.fetch('http://icanhazip.com/', 60)
   end
 end
 
-#echo "foobar" | xclip -selection clipboard
+$CopyExternalIP = WhatIsMy::external_ip.last.to_s
 
 Shoes.app( :title => "System Stats", :width => 400, :height => 250 ) do
   background lightsteelblue
@@ -20,5 +41,5 @@ Shoes.app( :title => "System Stats", :width => 400, :height => 250 ) do
   para "Your IP Address is: " + Facter.ipaddress + " ", link(strong("Copy")){Clipboard.copy "#{Facter.ipaddress}"}
   para "You are running: " + Facter.lsbdistdescription + " ", link(strong("Copy")){Clipboard.copy "#{Facter.lsbdistdescription}"}
   para "Your uptime is: " + Facter.uptime + " ", link(strong("Copy")){Clipboard.copy "#{Facter.uptime}"}
-  para "Your external IP address is: " + WhatIsMy::external_ip + " ", link(strong("Copy")){Clipboard.copy "#{WhatIsMy::external_ip}"}
+  para "Your external IP address is: " + $CopyExternalIP + " ", link(strong("Copy")){Clipboard.copy "#{$CopyExternalIP}"}
 end
