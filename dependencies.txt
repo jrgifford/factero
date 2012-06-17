@@ -1,0 +1,9 @@
+dependencies:
+
+- green_shoes gem
+
+- facter
+
+- ruby 1.9.3
+
+- xclip
