@@ -34,8 +34,8 @@ end
 
 $CopyExternalIP = WhatIsMy::external_ip.last.to_s
 
-Shoes.app( :title => "System Stats", :width => 400, :height => 250 ) do
-  background lightsteelblue
+Shoes.app( :title => "System Stats", :width => 450, :height => 250 ) do
+  background linen
   para "Your hostname is: " + Facter.hostname + " ", link(strong("Copy")){Clipboard.copy "#{Facter.hostname}"}
   para "Your username is: " + Facter.id + " ", link(strong("Copy")){Clipboard.copy "#{Facter.id}"}
   para "Your IP Address is: " + Facter.ipaddress + " ", link(strong("Copy")){Clipboard.copy "#{Facter.ipaddress}"}
