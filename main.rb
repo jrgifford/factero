@@ -41,13 +41,29 @@ Shoes.app( :title => "System Stats", :width => 500, :height => 250 ) do
   end
 
   flow width: 0.7 do
+    stack height: 24 do
+      para "Your hostname is: " + Facter.hostname + " "
+    end
 
-    para "Your hostname is: " + Facter.hostname + " "
-    para "Your username is: " + Facter.id + " "
-    para "Your IP Address is: " + Facter.ipaddress + " "
-    para "You are running: " + Facter.lsbdistdescription + " "
-    para "Your uptime is: " + Facter.uptime + " "
-    para "Your external IP address is: " + $ExternalIP + " "
+    stack height: 24 do
+      para "Your username is: " + Facter.id + " "
+    end
+
+    stack height: 24 do
+      para "Your IP Address is: " + Facter.ipaddress + " "
+    end
+
+    stack height: 24 do
+      para "You are running: " + Facter.lsbdistdescription + " "
+    end
+
+    stack height: 24 do
+      para "Your uptime is: " + Facter.uptime + " "
+    end
+
+    stack height: 24 do
+      para "Your external IP address is: " + $ExternalIP + " "
+    end
   end
 
   flow width: 0.2 do
