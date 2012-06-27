@@ -41,37 +41,60 @@ Shoes.app( :title => "System Stats", :width => 500, :height => 250 ) do
   end
 
   flow width: 0.7 do
-    stack height: 24 do
+    stack height: 30 do
       para "Your hostname is: " + Facter.hostname + " "
     end
 
-    stack height: 24 do
+    stack height: 30 do
       para "Your username is: " + Facter.id + " "
     end
 
-    stack height: 24 do
+    stack height: 30 do
       para "Your IP Address is: " + Facter.ipaddress + " "
     end
 
-    stack height: 24 do
+    stack height: 30 do
       para "You are running: " + Facter.lsbdistdescription + " "
     end
 
-    stack height: 24 do
+    stack height: 30 do
       para "Your uptime is: " + Facter.uptime + " "
     end
 
-    stack height: 24 do
+    stack height: 30 do
       para "Your external IP address is: " + $ExternalIP + " "
     end
   end
 
   flow width: 0.2 do
-    para link(strong("Copy")){Clipboard.copy "#{Facter.hostname}"}
-    para link(strong("Copy")){Clipboard.copy "#{Facter.id}"}
-    para link(strong("Copy")){Clipboard.copy "#{Facter.ipaddress}"}
-    para link(strong("Copy")){Clipboard.copy "#{Facter.lsbdistdescription}"}
-    para link(strong("Copy")){Clipboard.copy "#{Facter.uptime}"}
-    para link(strong("Copy")){Clipboard.copy "#{$ExternalIP}"}
+    stack height: 30 do
+      @b1 = button "Copy"
+      @b1.click{Clipboard.copy "#{Facter.hostname}"}
+    end
+
+    stack height: 30 do
+      @b2 = button "Copy"
+      @b2.click{Clipboard.copy "#{Facter.id}"}
+    end
+
+    stack height: 30 do
+      @b3 = button "Copy"
+      @b3.click{Clipboard.copy "#{Facter.ipaddress}"}
+    end
+
+    stack height: 30 do
+      @b4 = button "Copy"
+      @b4.click{Clipboard.copy "#{Facter.lsbdistdescription}"}
+    end
+
+    stack height: 30 do
+      @b5 = button "Copy"
+      @b5.click{Clipboard.copy "#{Facter.uptime}"}
+    end
+
+    stack height: 30 do
+      @b6 = button "Copy"
+      @b6.click{Clipboard.copy "#{$ExternalIP}"}
+    end
   end
 end
