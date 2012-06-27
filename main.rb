@@ -32,14 +32,30 @@ class WhatIsMy
   end
 end
 
-$CopyExternalIP = WhatIsMy::external_ip.last.to_s
+$ExternalIP = WhatIsMy::external_ip.last.to_s
 
-Shoes.app( :title => "System Stats", :width => 450, :height => 250 ) do
+Shoes.app( :title => "System Stats", :width => 500, :height => 250 ) do
   background linen
-  para "Your hostname is: " + Facter.hostname + " ", link(strong("Copy")){Clipboard.copy "#{Facter.hostname}"}
-  para "Your username is: " + Facter.id + " ", link(strong("Copy")){Clipboard.copy "#{Facter.id}"}
-  para "Your IP Address is: " + Facter.ipaddress + " ", link(strong("Copy")){Clipboard.copy "#{Facter.ipaddress}"}
-  para "You are running: " + Facter.lsbdistdescription + " ", link(strong("Copy")){Clipboard.copy "#{Facter.lsbdistdescription}"}
-  para "Your uptime is: " + Facter.uptime + " ", link(strong("Copy")){Clipboard.copy "#{Facter.uptime}"}
-  para "Your external IP address is: " + $CopyExternalIP + " ", link(strong("Copy")){Clipboard.copy "#{$CopyExternalIP}"}
+    tagline "      Factero: System stats since 2012"
+  flow width: 0.1 do
+  end
+
+  flow width: 0.7 do
+
+    para "Your hostname is: " + Facter.hostname + " "
+    para "Your username is: " + Facter.id + " "
+    para "Your IP Address is: " + Facter.ipaddress + " "
+    para "You are running: " + Facter.lsbdistdescription + " "
+    para "Your uptime is: " + Facter.uptime + " "
+    para "Your external IP address is: " + $ExternalIP + " "
+  end
+
+  flow width: 0.2 do
+    para link(strong("Copy")){Clipboard.copy "#{Facter.hostname}"}
+    para link(strong("Copy")){Clipboard.copy "#{Facter.id}"}
+    para link(strong("Copy")){Clipboard.copy "#{Facter.ipaddress}"}
+    para link(strong("Copy")){Clipboard.copy "#{Facter.lsbdistdescription}"}
+    para link(strong("Copy")){Clipboard.copy "#{Facter.uptime}"}
+    para link(strong("Copy")){Clipboard.copy "#{$ExternalIP}"}
+  end
 end
