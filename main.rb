@@ -36,7 +36,19 @@ $ExternalIP = WhatIsMy::external_ip.last.to_s
 
 Shoes.app( :title => "System Stats", :width => 500, :height => 250 ) do
   background linen
-    tagline "      Factero: System stats since 2012"
+  flow width: 0.1 do
+  end
+  flow width: 0.8 do
+    stack height: 50 do
+      stack height: 10 do
+      end
+      stack height: 30 do
+          tagline "Factero: System stats since 2012"
+      end
+    stack height: 10 do
+    end
+  end
+  end
   flow width: 0.1 do
   end
 
@@ -44,7 +56,6 @@ Shoes.app( :title => "System Stats", :width => 500, :height => 250 ) do
     stack height: 30 do
       para "Your hostname is: " + Facter.hostname + " "
     end
-
     stack height: 30 do
       para "Your username is: " + Facter.id + " "
     end
