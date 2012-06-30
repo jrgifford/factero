@@ -54,17 +54,17 @@ Shoes.app( :title => "System Stats", :width => 500, :height => 250 ) do
 
   flow width: 0.7 do
     vital_statistics = {
-      hostname: -> {para "Your hostname is: #{Facter.hostname} "},
-      username: -> {para "Your username is: #{Facter.id} "},
-      ipaddress: -> {para "Your IP Address is: #{Facter.ipaddress} "},
-      lsbdistrdescription: -> {para "You are running: #{Facter.lsbdistdescription} "},
-      uptime: -> {para "Your uptime is: #{Facter.uptime}"},
-      externalip: -> {para "Your external IP address is: #{$ExternalIP} "},
+      hostname: "Your hostname is: #{Facter.hostname} ",
+      username: "Your username is: #{Facter.id} ",
+      ipaddress: "Your IP Address is: #{Facter.ipaddress} ",
+      lsbdistrdescription: "You are running: #{Facter.lsbdistdescription} ",
+      uptime: "Your uptime is: #{Facter.uptime}",
+      externalip: "Your external IP address is: #{$ExternalIP} ",
     }
 
     vital_statistics.each_key do |key|
       stack height: 30 do
-        vital_statistics[key].call
+        para vital_statistics[key]
       end
     end
 
