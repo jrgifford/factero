@@ -1,8 +1,10 @@
-= Factero
+Factero 
+=======
 
 - By J Gifford
 
-== Requirements
+Requirements
+------------
 
  - Ruby 1.9.3
  - Green Shoes
@@ -14,6 +16,8 @@
  ```sh
  bundle install
  ```
- == Optional
+
+Optional
+--------
 
 - xclip
