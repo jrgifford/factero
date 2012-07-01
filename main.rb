@@ -3,8 +3,6 @@ require 'facter'
 require 'clipboard'
 require 'net/http'
 
-
-
 # lets try the Yahoo! caching system from http://developer.yahoo.com/ruby/ruby-cache.html
 
 class MemFetcher
@@ -34,7 +32,7 @@ end
 
 $ExternalIP = WhatIsMy::external_ip.last.to_s
 
-Shoes.app( :title => "System Stats", :width => 500, :height => 250 ) do
+Shoes.app( :title => "System Stats", :width => 500, :height => 280 ) do
   background linen
   flow width: 0.1 do
   end
@@ -68,37 +66,45 @@ Shoes.app( :title => "System Stats", :width => 500, :height => 250 ) do
       end
     end
 
+    stack height: 30 do
+      para "Thank you for using Factero!"
+    end
+
   end
 
   flow width: 0.2 do
     stack height: 30 do
-      @b1 = button "Copy"
-      @b1.click{Clipboard.copy "#{Facter.hostname}"}
+      button( "Copy").
+      click {Clipboard.copy "#{Facter.hostname}"}
     end
 
     stack height: 30 do
-      @b2 = button "Copy"
-      @b2.click{Clipboard.copy "#{Facter.id}"}
+      button( "Copy").
+      click {Clipboard.copy "#{Facter.id}"}
     end
 
     stack height: 30 do
-      @b3 = button "Copy"
-      @b3.click{Clipboard.copy "#{Facter.ipaddress}"}
+      button( "Copy").
+      click {Clipboard.copy "#{Facter.ipaddress}"}
     end
 
     stack height: 30 do
-      @b4 = button "Copy"
-      @b4.click{Clipboard.copy "#{Facter.lsbdistdescription}"}
+      button( "Copy").
+      click {Clipboard.copy "#{Facter.lsbdistdescription}"}
     end
 
     stack height: 30 do
-      @b5 = button "Copy"
-      @b5.click{Clipboard.copy "#{Facter.uptime}"}
+      button( "Copy").
+      click {Clipboard.copy "#{Facter.uptime}"}
     end
 
     stack height: 30 do
-      @b6 = button "Copy"
-      @b6.click{Clipboard.copy "#{$ExternalIP}"}
+      button( "Copy").
+      click {Clipboard.copy "#{$ExternalIP}"}
+    end
+    stack height: 30 do
+      button( 'Exit').
+      click {exit}
     end
   end
 end
